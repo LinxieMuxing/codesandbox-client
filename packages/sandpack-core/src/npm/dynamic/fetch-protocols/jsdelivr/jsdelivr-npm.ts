@@ -7,6 +7,7 @@ import { fetchWithRetries } from '../utils';
 import { JSDelivrMeta, normalizeJSDelivr } from './utils';
 
 export class JSDelivrNPMFetcher implements FetchProtocol {
+  // TODO 切换为内网jsNPM
   async file(name: string, version: string, path: string): Promise<string> {
     const url = `https://cdn.jsdelivr.net/npm/${name}@${version}${path}`;
     const result = await fetchWithRetries(url).then(x => x.text());

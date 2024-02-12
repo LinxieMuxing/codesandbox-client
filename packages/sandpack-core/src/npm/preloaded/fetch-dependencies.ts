@@ -20,10 +20,15 @@ const DEV_URLS = {
   bucket: 'https://dev-packager-packages.codesandbox.io',
 };
 // eslint-disable-next-line
+// const PROD_URLS = {
+//   packager:
+//     'https://aiwi8rnkp5.execute-api.eu-west-1.amazonaws.com/prod/packages',
+//   bucket: 'https://prod-packager-packages.codesandbox.io',
+// };
+
 const PROD_URLS = {
-  packager:
-    'https://aiwi8rnkp5.execute-api.eu-west-1.amazonaws.com/prod/packages',
-  bucket: 'https://prod-packager-packages.codesandbox.io',
+  packager: 'http://localhost:4545',// 兜底打包服务
+  bucket: 'http://localhost:4545',// 兜底unpack路径
 };
 
 const URLS = PROD_URLS;
@@ -65,7 +70,7 @@ function callApi(url: string, method = 'GET') {
 async function requestPackager(
   url: string,
   method: string = 'GET',
-  retries: number = 0
+  retries: number = 1
 ): Promise<any> {
   // eslint-disable-next-line no-constant-condition
   debug(`Trying to call packager for ${retries} time`);
@@ -113,16 +118,21 @@ export async function getDependency(
 
   const normalizedVersion = normalizeVersion(version);
   const dependencyUrl = dependenciesToQuery({ [depName]: normalizedVersion });
-  const fullUrl = `${BUCKET_URL}/v${VERSION}/packages/${depName}/${normalizedVersion}.json`;
+  // const fullUrl = `${BUCKET_URL}/v${VERSION}/packages/${depName}/${normalizedVersion}.json`;
 
+  const fullUrl = `${BUCKET_URL}/${depName}@${normalizedVersion}`;
   try {
+    // 优先请求unpack 后走packager逻辑
     const bucketManifest = await callApi(fullUrl);
     return bucketManifest;
   } catch (e) {
     // The dep has not been generated yet...
-    const packagerRequestUrl = `${PACKAGER_URL}/${dependencyUrl}`;
-    await requestPackager(packagerRequestUrl, 'POST');
+    // const packagerRequestUrl = `${PACKAGER_URL}/${dependencyUrl}`;
+    // await requestPackager(packagerRequestUrl, 'POST');
 
-    return requestPackager(fullUrl);
+    // return requestPackager(fullUrl);
+
+    const bucketManifest = await callApi(fullUrl);
+    return bucketManifest;
   }
 }
