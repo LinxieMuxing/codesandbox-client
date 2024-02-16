@@ -268,6 +268,8 @@ const transformFiles = dir =>
       }, {})
     : {};
 
+// note：获取依赖元数据 待确认修改项
+// https://unpkg.com/react@18.2.0/index.js?meta
 const getFileMetaData = (dependency, version, depPath) => {
   if (UNPKG) {
     const usedDepPath = /\/$/.test(depPath) ? depPath : (depPath + '/');

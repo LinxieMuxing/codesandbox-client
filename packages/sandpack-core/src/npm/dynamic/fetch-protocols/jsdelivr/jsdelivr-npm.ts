@@ -14,7 +14,7 @@ export class JSDelivrNPMFetcher implements FetchProtocol {
 
     return result;
   }
-
+// note：获取依赖元数据 待确认修改项
   async meta(name: string, version: string): Promise<Meta> {
     // if it's a tag it won't work, so we fetch latest version otherwise
     const latestVersion = /^\d/.test(version)

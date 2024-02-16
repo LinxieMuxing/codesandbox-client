@@ -14,11 +14,6 @@ const VERSION = require('@codesandbox/common/lib/version').default;
 const commonConfig = require('./webpack.common');
 
 const publicPath = '/';
-// const isMaster =
-//   childProcess
-//     .execSync(`git branch | grep \\* | cut -d ' ' -f2`)
-//     .toString()
-//     .trim() === 'master';
 
 const normalize = normalizeName({ name: true, automaticNameDelimiter: '~' });
 
@@ -358,11 +353,5 @@ module.exports = merge(commonConfig, {
         },
       ],
     }),
-    // isMaster &&
-    //   new SentryWebpackPlugin({
-    //     include: 'src',
-    //     ignore: ['node_modules', 'webpack.config.js'],
-    //     release: VERSION,
-    //   }),
   ].filter(Boolean),
 });

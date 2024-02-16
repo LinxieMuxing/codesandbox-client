@@ -27,6 +27,7 @@ interface JsDelivrApiResult {
   versions: string[];
 }
 
+// note：获取依赖版本信息 待确认修改项
 async function fetchAllVersions(dep: string): Promise<JsDelivrApiResult> {
   return fetchWithRetries<JsDelivrApiResult>(
     `https://data.jsdelivr.com/v1/package/npm/${dep}`

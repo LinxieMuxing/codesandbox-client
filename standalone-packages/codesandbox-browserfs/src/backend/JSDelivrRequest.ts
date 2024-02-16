@@ -113,6 +113,7 @@ export default class JSDelivrRequest extends BaseFileSystem implements FileSyste
   /**
    * Construct an HTTPRequest file system backend with the given options.
    */
+  // note：获取依赖元数据 待确认修改项
   public static Create(opts: JSDelivrRequestOptions, cb: BFSCallback<JSDelivrRequest>): void {
     const URL = `https://data.jsdelivr.com/v1/package/npm/${opts.dependency}@${opts.version}/flat`;
 

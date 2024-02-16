@@ -99,6 +99,7 @@ const tempTransformFiles = files => {
   return finalObj;
 };
 
+// note：获取依赖元数据 待确认修改项
 const getFileMetaData = (dependency, version, depPath) =>
   doFetch(
     `https://data.jsdelivr.com/v1/package/npm/${dependency}@${version}/flat`
@@ -156,7 +157,7 @@ const getFileTypes = (
     );
   });
 };
-
+// note：获取依赖元数据 待确认修改项
 function fetchFromMeta(dependency, version, fetchedPaths) {
   const depUrl = `https://data.jsdelivr.com/v1/package/npm/${dependency}@${version}/flat`;
   return doFetch(depUrl)
