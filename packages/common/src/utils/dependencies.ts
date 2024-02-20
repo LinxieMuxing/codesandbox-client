@@ -1,9 +1,15 @@
 import { valid, maxSatisfying } from 'semver';
-
+// note: 判断是否为私有npm
+// TODO：修正逻辑判断
+const isPrivateDependencies = (name: string) => {
+  if (name.includes('xxx')) return true;
+  return false;
+};
 async function fetchWithRetries<T = any>(url: string): Promise<T> {
   let err: Error;
   for (let i = 0; i < 2; i++) {
     try {
+      if (isPrivateDependencies(url)) return;
       // eslint-disable-next-line
       return await fetch(url).then(x => {
         if (x.ok) {

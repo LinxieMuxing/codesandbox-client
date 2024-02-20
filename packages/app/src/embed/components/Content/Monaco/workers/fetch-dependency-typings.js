@@ -5,6 +5,13 @@ self.importScripts([
   'https://cdnjs.cloudflare.com/ajax/libs/typescript/2.7.2/typescript.min.js',
 ]);
 
+// note: 判断是否为私有npm
+// TODO：修正逻辑判断
+const isPrivateDependencies = name => {
+  if (name.includes('xxx')) return true;
+  return false;
+};
+
 const ROOT_URL = `https://cdn.jsdelivr.net/`;
 
 const loadedTypings = [];
@@ -237,6 +244,7 @@ async function fetchAndAddDependencies(dependencies) {
   await Promise.all(
     depNames.map(async dep => {
       try {
+        if (isPrivateDependencies(dep)) return;
         if (!loadedTypings.includes(dep)) {
           loadedTypings.push(dep);
 

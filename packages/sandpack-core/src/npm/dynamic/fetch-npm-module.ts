@@ -141,6 +141,7 @@ export function downloadDependency(
   const nameWithoutAlias = depName.replace(ALIAS_REGEX, '');
   const protocol = getFetchProtocol(depName, depVersion);
 
+  // note: 请求子包文件 例如react-dom/client.js
   const newPkg = protocol
     .file(nameWithoutAlias, depVersion, relativePath)
     .catch(async () => {

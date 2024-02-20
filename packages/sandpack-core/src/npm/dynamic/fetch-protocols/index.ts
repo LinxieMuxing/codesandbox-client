@@ -83,11 +83,13 @@ export function getFetchProtocol(
   depVersion: string,
   useFallback = false
 ) {
-  const runCondition = (p: ProtocolDefinition) =>
-    p.condition(depName, depVersion, useFallback);
-
-  return (
-    contributedProtocols.find(runCondition)?.protocol ||
-    protocols.find(runCondition)!.protocol
-  );
+  // note:决定meta 以及文件请求路径
+  // const runCondition = (p: ProtocolDefinition) =>
+  //   p.condition(depName, depVersion, useFallback);
+  // return (
+  //   contributedProtocols.find(runCondition)?.protocol ||
+  //   protocols.find(runCondition)!.protocol
+  // );
+  // TODO： 新增protocols类 暂时使用jsdelivr代替
+  return preloadedProtocols.jsdelivr;
 }

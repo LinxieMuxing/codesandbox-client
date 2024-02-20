@@ -169,6 +169,7 @@ const doFetch = url => {
   return promise;
 };
 
+// note：获取type
 const fetchFromDefinitelyTyped = (dependency, version, fetchedPaths) => {
   const depUrl = `${ROOT_URL}@types/${dependency
     .replace("@", "")
@@ -366,6 +367,7 @@ const getFileTypes = (
   });
 };
 
+// note：获取.d.ts or .ts文件
 function fetchFromMeta(dependency, version, fetchedPaths) {
   return getFileMetaData(dependency, version, "/").then(meta => {
     let dtsFiles = Object.keys(meta).filter(f => /\.d\.ts$/.test(f));

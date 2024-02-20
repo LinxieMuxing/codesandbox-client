@@ -26,9 +26,14 @@ const DEV_URLS = {
 //   bucket: 'https://prod-packager-packages.codesandbox.io',
 // };
 
+// const PROD_URLS = {
+//   packager: 'http://47.116.204.49:4545',// 兜底打包服务
+//   bucket: 'http://47.116.204.49:4545',// 兜底unpack路径
+// };
+// TODO 修改打包服务
 const PROD_URLS = {
-  packager: 'http://47.116.204.49:4545',// 兜底打包服务
-  bucket: 'http://47.116.204.49:4545',// 兜底unpack路径
+  packager: 'http://localhost:4545', // 兜底打包服务
+  bucket: 'http://localhost:4545', // 兜底unpack路径
 };
 
 const URLS = PROD_URLS;
